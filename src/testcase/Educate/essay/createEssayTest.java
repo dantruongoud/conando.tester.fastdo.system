@@ -2,6 +2,7 @@ package testcase.Educate.essay;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.Educate.createEducatePage;
 import page.Educate.editEducatePage;
@@ -9,28 +10,9 @@ import page.Educate.essay.createEssayPage;
 import setupbase.baseSetup;
 
 public class createEssayTest {
-    int testcase;
-    String title, time, point, content;
-
-    public createEssayTest(int testcase, String title, String time, String point, String content) {
-        this.testcase = testcase;
-        this.title = title;
-        this.time = time;
-        this.point = point;
-        this.content = content;
-    }
 
     public static void main(String[] args) {
         try {
-            createEssayTest[] data_test = {
-                    new createEssayTest(1, "", "", "", "content"),
-                    new createEssayTest(2, "Bài thi tự luận", "", "", "content"),
-                    new createEssayTest(3, "Bài thi tự luận", "1", "", "content"),
-                    new createEssayTest(4, "Bài thi tự luận", "1", "2", "content"),
-                    new createEssayTest(5, "Bài thi tự luận", "1", "-2", "content"),
-                    new createEssayTest(6, "Bài thi tự luận", "1", "1", ""),
-                    new createEssayTest(7, "Bài thi tự luận", "1", "1", "content")
-            };
 
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
@@ -38,6 +20,8 @@ public class createEssayTest {
             createEducatePage create = new createEducatePage(driver);
             editEducatePage edit = new editEducatePage(driver);
             createEssayPage essay = new createEssayPage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Bài thi tự luận");
 
             index.openCorp();
             create.navigation_educate();
@@ -55,10 +39,12 @@ public class createEssayTest {
                 edit.addQuestion();
                 Thread.sleep(1000);
 
-                for (int i = 0; i < data_test.length; i++) {
+                for (int i = 1; i < 8; i++) {
                     System.out.println("======================");
-                    System.out.println("Testcase: " + data_test[i].testcase);
-                    essay.createEssay(data_test[i].title, data_test[i].time, data_test[i].point, data_test[i].content);
+
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    essay.createEssay(excel.getCellData("Title", i), excel.getCellData("Time", i),
+                            excel.getCellData("Point", i), excel.getCellData("Content", i));
                     index.btnComponent.click();
                     Thread.sleep(1200);
 

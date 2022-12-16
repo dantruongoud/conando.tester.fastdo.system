@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CreateOKRsPage {
-    
+
     private WebDriver driver;
 
     @FindBy(xpath = "//span[normalize-space()='OKRs']")
@@ -33,7 +33,7 @@ public class CreateOKRsPage {
     @FindBy(css = "div[class='control is-expanded'] input[placeholder='Bắt buộc nhập...']")
     private WebElement nameResult_input;
 
-    @FindBy(css = "input[placeholder='Nhập số liệu mục tiệu']")
+    @FindBy(css = "input[placeholder='Nhập số liệu mục tiêu']")
     private WebElement number_input;
 
     @FindBy(css = "input[placeholder='Đơn vị tính']")

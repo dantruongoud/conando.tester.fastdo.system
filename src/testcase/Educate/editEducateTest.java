@@ -2,6 +2,7 @@ package testcase.Educate;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.Educate.createEducatePage;
 import page.Educate.editEducatePage;
@@ -10,17 +11,14 @@ import setupbase.baseSetup;
 public class editEducateTest {
     public static void main(String[] args) {
         try {
-            createEducateTest[] data_test = {
-                    new createEducateTest(1, "", "1", "10"),
-                    new createEducateTest(2, "Automation Edit", "0", "10"),
-                    new createEducateTest(3, "Automation Edit", "1", "10"),
-            };
 
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index index = new index(driver);
             createEducatePage create = new createEducatePage(driver);
             editEducatePage edit = new editEducatePage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Tạo khoá học");
 
             index.openCorp();
             create.navigation_educate();
@@ -36,11 +34,12 @@ public class editEducateTest {
 
                 create.clearTxt();
 
-                for (int i = 0; i < data_test.length; i++) {
+                for (int i = 1; i < 4; i++) {
                     System.out.println("======================");
-                    
-                    System.out.println("Testcase: " + data_test[i].testcase);
-                    create.createEducate(data_test[i].title, data_test[i].number, data_test[i].time);
+
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    create.createEducate(excel.getCellData("title", i), excel.getCellData("number", i),
+                            excel.getCellData("time", i));
                     Thread.sleep(1200);
 
                     String noti = index.messgaeError_tagline();
@@ -56,6 +55,7 @@ public class editEducateTest {
                             break;
                         default:
                             if (create.verifyEducatenew("Automation Edit")) {
+                                System.out.println("Chỉnh sửa thành công");
                                 index.passed();
                             } else {
                                 index.failed();

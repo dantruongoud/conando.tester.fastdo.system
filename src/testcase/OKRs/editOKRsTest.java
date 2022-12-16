@@ -2,38 +2,24 @@ package testcase.OKRs;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.OKRs.CreateOKRsPage;
 import page.OKRs.editOKRsPage;
 import setupbase.baseSetup;
 
 public class editOKRsTest {
-    int testcase;
-    String nameOKRs, nameResult, number, unit;
-
-    public editOKRsTest(int testcase, String nameOKRs, String nameResult, String number, String unit) {
-        this.testcase = testcase;
-        this.nameOKRs = nameOKRs;
-        this.nameResult = nameResult;
-        this.number = number;
-        this.unit = unit;
-    }
 
     public static void main(String[] args) {
         try {
-            editOKRsTest[] data_test = {
-                    new editOKRsTest(1, "", "nameResult", "number", "unit"),
-                    new editOKRsTest(2, "OKRs QUY I", "", "number", "unit"),
-                    new editOKRsTest(3, "OKRs QUY I", "Hoàn thành OKRs QUÝ I", "", "unit"),
-                    new editOKRsTest(4, "OKRs QUY I", "Hoàn thành OKRs QUÝ I", "1", ""),
-                    new editOKRsTest(5, "OKRs QUY I", "Hoàn thành OKRs QUÝ I", "1", "OKRs")
-            };
 
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index index = new index(driver);
             CreateOKRsPage create = new CreateOKRsPage(driver);
             editOKRsPage edit = new editOKRsPage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Tạo OKRs");
 
             index.openCorp();
             create.click_navigation_OKRs();
@@ -47,12 +33,12 @@ public class editOKRsTest {
             index.waitForPageLoaded();
             create.cleartxt();
 
-            for (int i = 0; i < data_test.length; i++) {
+            for (int i = 1; i < 6; i++) {
                 System.out.println("======================");
-                
-                System.out.println("Testcase: " + data_test[i].testcase);
-                create.create_OKRs(data_test[i].nameOKRs, data_test[i].nameResult, data_test[i].number,
-                        data_test[i].unit);
+
+                System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                create.create_OKRs(excel.getCellData("nameOKRs", i), excel.getCellData("nameResult", i),
+                        excel.getCellData("number", i), excel.getCellData("unit", i));
                 Thread.sleep(1200);
 
                 String noti = index.messgaeError_tagline();

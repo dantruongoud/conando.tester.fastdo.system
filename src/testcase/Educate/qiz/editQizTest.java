@@ -2,6 +2,7 @@ package testcase.Educate.qiz;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.Educate.createEducatePage;
 import page.Educate.editEducatePage;
@@ -17,6 +18,8 @@ public class editQizTest {
             createEducatePage create = new createEducatePage(driver);
             editEducatePage edit = new editEducatePage(driver);
             createQizPage qiz = new createQizPage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Sửa bài trắc nghiệm");
 
             index.openCorp();
             create.navigation_educate();
@@ -33,22 +36,13 @@ public class editQizTest {
                 qiz.clearTXT();
                 Thread.sleep(1000);
 
-                createQizTest[] data_test = {
-                        new createQizTest(1, "", "", "0", "content", "result"),
-                        new createQizTest(2, "Bài thi trắc nghiệm", "", "0", "content", "result"),
-                        new createQizTest(3, "Bài thi trắc nghiệm", "1", "0", "content", "result"),
-                        new createQizTest(4, "Bài thi trắc nghiệm", "1", "-1", "Content", "result"),
-                        new createQizTest(5, "Bài thi trắc nghiệm", "1", "2", "content", "result"),
-                        new createQizTest(6, "Bài thi trắc nghiệm", "1", "1", "", "result"),
-                        new createQizTest(7, "Bài thi trắc nghiệm", "1", "1", "Content", ""),
-                        new createQizTest(8, "Bài thi trắc nghiệm", "1", "1", "Content", "result"),
-                };
-
-                for (int i = 0; i < data_test.length; i++) {
+                for (int i = 1; i < 9; i++) {
                     System.out.println("======================");
-                    System.out.println("Testcase: " + data_test[i].testcase);
-                    qiz.create_qiz(data_test[i].title, data_test[i].time, data_test[i].point, data_test[i].content,
-                            data_test[i].result);
+
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    qiz.create_qiz(excel.getCellData("title", i), excel.getCellData("time", i),
+                            excel.getCellData("point", i), excel.getCellData("content", i),
+                            excel.getCellData("result", i));
                     index.btnComponent.click();
                     Thread.sleep(1200);
 
@@ -83,12 +77,11 @@ public class editQizTest {
                         // qiz.print();
                         // break;
                         default:
-                        
+
                             noti = index.messgaeError_tagline();
                             if (noti.equals("Đã cập nhật thông tin bài trắc nghiệm !")) {
                                 System.out.println(noti);
-                                System.out.println("PASSED");
-                                System.out.println("======================");
+                                index.passed();
                             } else {
                                 System.out.println(noti);
                                 index.failed();

@@ -2,41 +2,22 @@ package testcase.CFRs.Checkin;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.CFRs.Checkin.CreateDraftCheckinPage;
 import setupbase.baseSetup;
 
 public class CreateDraftCheckinTest {
-    int testcase;
-    String text1, text2, text3, text4;
-
-    public CreateDraftCheckinTest(int testcase, String text1, String text2, String text3, String text4) {
-        this.testcase = testcase;
-        this.text1 = text1;
-        this.text2 = text2;
-        this.text3 = text3;
-        this.text4 = text4;
-    }
 
     public static void main(String[] args) {
         try {
-
-            CreateDraftCheckinTest[] data_test = {
-                    new CreateDraftCheckinTest(1, "", "", "", ""),
-                    new CreateDraftCheckinTest(2, "Tiến độ tốt", "Không có", "Chưa có", "Không có"),
-                    new CreateDraftCheckinTest(3, "", "Chưa có", "Chưa có", "Chưa có"),
-                    new CreateDraftCheckinTest(4, "Chưa có", "", "Chưa có", "Chưa có"),
-                    new CreateDraftCheckinTest(5, "Chưa có", "Chưa có", "", "Chưa có"),
-                    new CreateDraftCheckinTest(6, "Tiến độ tốt", "Không có", "Chưa có",
-                            ""),
-                    new CreateDraftCheckinTest(7, "Tiến độ tốt", "Không có", "Chưa có",
-                            "Không có"),
-            };
 
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index index = new index(driver);
             CreateDraftCheckinPage create = new CreateDraftCheckinPage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("CheckinDraft");
 
             index.openCorp();
             create.navigation_CFRs();
@@ -54,13 +35,13 @@ public class CreateDraftCheckinTest {
                 index.btnComponent.click();
                 Thread.sleep(1000);
 
-                for (int i = 0; i < data_test.length; i++) {
+                for (int i = 1; i < 8; i++) {
+
                     System.out.println("======================");
 
-                    System.out.println("Testcase: " + data_test[i].testcase);
-                    create.create_checkin(data_test[i].text1, data_test[i].text2,
-                            data_test[i].text3,
-                            data_test[i].text4);
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    create.create_checkin(excel.getCellData("text1", i), excel.getCellData("text2", i),
+                            excel.getCellData("text3", i), excel.getCellData("text4", i));
                     Thread.sleep(1200);
 
                     String noti = index.messgaeError_tagline();

@@ -24,10 +24,10 @@ public class CreateDraftCheckinPage {
     @FindBy(css = "a[class='button is-link']")
     private WebElement create_btn;
 
-    @FindBy(xpath = "//body[1]/main[1]/section[1]/section[1]/div[2]/div[1]/table[1]/tbody[1]/tr[1]/td[4]/div[1]/div[1]/select[1]")
+    @FindBy(xpath = "(//select)[1]")
     private WebElement selectConfident_OKRs;
 
-    @FindBy(xpath = "//body[1]/main[1]/section[1]/section[1]/div[2]/div[1]/table[1]/tbody[1]/tr[4]/td[3]/div[1]/div[1]/select[1]")
+    @FindBy(xpath = "(//select)[2]")
     private WebElement selectConfident_KRs;
 
     @FindBy(css = "li:nth-child(1) > div:nth-child(2) > textarea:nth-child(1)")
