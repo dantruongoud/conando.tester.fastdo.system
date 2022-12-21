@@ -15,7 +15,7 @@ public class CreateDepartmentPage {
     @FindBy(xpath = "//span[contains(text(),'Thêm mới')]")
     private WebElement add_btn;
 
-    @FindBy(xpath = "//body[1]/main[1]/section[1]/section[1]/div[2]/div[1]/form[1]/div[1]/div[1]/input[1]")
+    @FindBy(xpath = "//form[1]/div[1]//input[@class='input']")
     private WebElement nameDepartment_input;
 
     @FindBy(xpath = "//input[@placeholder='Nhập chức danh quản lý, không quá 20 ký tự']")
@@ -53,7 +53,7 @@ public class CreateDepartmentPage {
     }
 
     public void print() {
-        System.out.println("PASSED");
+        System.out.println("Status: PASSED");
         System.out.println("=========================");
         cleartxt();
     }

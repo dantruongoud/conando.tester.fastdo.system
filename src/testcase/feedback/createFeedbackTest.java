@@ -2,32 +2,22 @@ package testcase.feedback;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.feedback.createFeedbackPage;
 import setupbase.baseSetup;
 
 public class createFeedbackTest {
-    int testcase;
-    String title, content;
-
-    public createFeedbackTest(int testcase, String title, String content) {
-        this.testcase = testcase;
-        this.title = title;
-        this.content = content;
-    }
 
     public static void main(String[] args) {
         try {
-            createFeedbackTest[] data_test = {
-                    new createFeedbackTest(1, "", "content"),
-                    new createFeedbackTest(2, "Tôi muốn góp ý", ""),
-                    new createFeedbackTest(3, "Tôi muốn góp ý", "Tôi góp ý là"),
-            };
 
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index index = new index(driver);
             createFeedbackPage create = new createFeedbackPage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Góp ý hệ thống");
 
             index.openCorp();
             create.navigation_feedback();
@@ -37,11 +27,11 @@ public class createFeedbackTest {
 
                 index.btnComponent.click();
 
-                for (int i = 0; i < data_test.length; i++) {
+                for (int i = 1; i < 4; i++) {
                     System.out.println("======================");
 
-                    System.out.println("Testcase: " + data_test[i].testcase);
-                    create.createFeedback(data_test[i].title, data_test[i].content);
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    create.createFeedback(excel.getCellData("title", i), excel.getCellData("content", i));
                     index.btnComponent.click();
 
                     Thread.sleep(1200);
@@ -54,7 +44,6 @@ public class createFeedbackTest {
                             create.print();
                             break;
                         default:
-                            noti = index.messgaeError_tagline();
                             if (noti.equals("Đã gửi góp ý thành công")) {
                                 System.out.println(noti);
                                 index.passed();

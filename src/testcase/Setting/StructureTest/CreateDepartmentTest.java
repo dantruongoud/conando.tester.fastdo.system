@@ -2,37 +2,26 @@ package testcase.Setting.StructureTest;
 
 import org.openqa.selenium.WebDriver;
 
+import excelHelpers.excelhelpers;
 import page.index;
 import page.Setting.StructurePage.CreateDepartmentPage;
 import setupbase.baseSetup;
 
 public class CreateDepartmentTest {
-    int testcase;
-    String nameDepartment, manager, deputy;
-
-    public CreateDepartmentTest(int testcase, String nameDepartment, String manager, String deputy) {
-        this.testcase = testcase;
-        this.nameDepartment = nameDepartment;
-        this.manager = manager;
-        this.deputy = deputy;
-    }
 
     public static void main(String[] args) {
         try {
-            CreateDepartmentTest[] data_test = {
-                    new CreateDepartmentTest(1, "", "manager", "deputy"),
-                    new CreateDepartmentTest(2, "department", "", "deputy"),
-                    new CreateDepartmentTest(3, "department", "manager", ""),
-                    new CreateDepartmentTest(4, "department", "manager", "deputy"),
-            };
 
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index index = new index(driver);
             CreateDepartmentPage department = new CreateDepartmentPage(driver);
+            excelhelpers excel = new excelhelpers();
+            excel.setExcelSheet("Cấu hình - Phòng ban");
 
             index.openCorp();
             index.navigation();
+            Thread.sleep(1000);
             department.navigation_structure();
             index.waitForPageLoaded();
 
@@ -41,11 +30,12 @@ public class CreateDepartmentTest {
 
             if (index.verifyTitle("Tạo phòng ban mới")) {
 
-                for (int i = 0; i < data_test.length; i++) {
+                for (int i = 1; i < 5; i++) {
                     System.out.println("=========================");
 
-                    System.out.println("Testcase: " + data_test[i].testcase);
-                    department.createDepartment(data_test[i].nameDepartment, data_test[i].manager, data_test[i].deputy);
+                    System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    department.createDepartment(excel.getCellData("nameDepartment", i), excel.getCellData("manager", i),
+                            excel.getCellData("deputy", i));
                     Thread.sleep(1200);
 
                     String noti = index.messgaeError_tagline();
@@ -55,8 +45,7 @@ public class CreateDepartmentTest {
                             department.print();
                             break;
                         default:
-                            noti = index.messgaeError_tagline();
-                            if (noti != null) {
+                            if (noti.equals("Đã tạo phòng ban " + excel.getCellData("nameDepartment", 2))) {
                                 System.out.println(noti);
                                 index.passed();
                             } else {
