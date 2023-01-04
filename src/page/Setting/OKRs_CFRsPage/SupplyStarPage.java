@@ -16,7 +16,7 @@ public class SupplyStarPage {
     private By confirm_btn = By.xpath("//span[contains(text(),'Xác nhận')]");
 
     private By choseUser_btn = By
-            .xpath("/html/body/main/section/section[1]/div[2]/div/div[2]/table/tbody/tr[1]/td[1]/label/input");
+            .xpath("(//input[@type='checkbox'])[3]");
 
     private By starNumber_input = By.xpath("//input[@type='number']");
 

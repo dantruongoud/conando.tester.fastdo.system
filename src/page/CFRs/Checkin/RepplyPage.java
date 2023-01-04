@@ -96,7 +96,7 @@ public class RepplyPage {
         try {
             String get = "";
             List<WebElement> comment = driver
-                    .findElements(By.className("column is-three-fifths-tablet is-full-mobile"));
+                    .findElements(By.xpath("//li[@class='column is-three-fifths-tablet is-full-mobile']"));
             for (int i = 0; i < comment.size(); i++) {
                 get = comment.get(i).getText().strip();
                 System.out.println(get);

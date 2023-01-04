@@ -134,7 +134,6 @@ public class index {
         System.out.println("Sai tiêu đề trang hiển thị...");
         System.out.println("Status: FAILED");
         System.out.println("=========================");
-        driver.close();
     }
 
     public void uploadImage(String upfile_btn, String typeFind) {

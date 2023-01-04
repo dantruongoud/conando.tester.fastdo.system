@@ -49,7 +49,7 @@ public class CheckinTest {
 
                 for (int i = 0; i < data_test.length; i++) {
                     System.out.println("======================");
-                    
+
                     System.out.println("Testcase: " + data_test[i].testcase);
                     CheckinPage checkin = new CheckinPage(driver);
                     checkin.textRepply(data_test[i].repply, data_test[i].day);
@@ -68,6 +68,7 @@ public class CheckinTest {
                             break;
                         default:
                             if (checkin.verifyButton()) {
+                                System.out.println("Checkin success");
                                 index.passed();
                             } else {
                                 index.failed();

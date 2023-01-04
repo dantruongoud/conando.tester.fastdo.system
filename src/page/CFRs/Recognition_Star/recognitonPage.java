@@ -40,7 +40,7 @@ public class recognitonPage {
     public void select() {
         try {
             Select selectbox = new Select(select_tieuchi);
-            selectbox.selectByVisibleText("good (0)");
+            selectbox.selectByVisibleText("A (0)");
         } catch (Exception e) {
             e.printStackTrace();
         }
