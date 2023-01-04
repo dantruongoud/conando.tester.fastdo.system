@@ -13,13 +13,13 @@ public class CreateOKRsPage {
     private WebDriver driver;
 
     @FindBy(xpath = "//span[normalize-space()='OKRs']")
-    private WebElement naviga_OKRs_btn;
+    public WebElement naviga_OKRs_btn;
 
     @FindBy(xpath = "//span[contains(text(),'Thiết lập')]")
-    private WebElement naviga_create_btn;
+    public WebElement naviga_create_btn;
 
     @FindBy(xpath = "//span[contains(text(),'Tạo OKRs')]")
-    private WebElement naviga_CreatePage;
+    public WebElement naviga_CreatePage;
 
     @FindBy(css = "a[class='button']")
     private WebElement create_btn;
@@ -44,41 +44,29 @@ public class CreateOKRsPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void click_navigation_OKRs() {
+    public void navigation_OKRsPage() {
         try {
-            if (naviga_OKRs_btn.isDisplayed()) {
-                naviga_OKRs_btn.click();
-            }
+            naviga_OKRs_btn.click();
+            Thread.sleep(500);
+            naviga_create_btn.click();
+            Thread.sleep(500);
+            naviga_CreatePage.click();
+            Thread.sleep(500);
+            create_btn.click();
+            Thread.sleep(2000);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void click_navigation_CreateOKRs() {
+    public void navigation_OKRsPageEdit() {
         try {
-            if (naviga_create_btn.isDisplayed()) {
-                naviga_create_btn.click();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void click_navigation_CreatePage() {
-        try {
-            if (naviga_CreatePage.isDisplayed()) {
-                naviga_CreatePage.click();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void click_create() {
-        try {
-            if (create_btn.isDisplayed()) {
-                create_btn.click();
-            }
+            naviga_OKRs_btn.click();
+            Thread.sleep(500);
+            naviga_create_btn.click();
+            Thread.sleep(500);
+            naviga_CreatePage.click();
+            Thread.sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
         }

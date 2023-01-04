@@ -22,13 +22,8 @@ public class editOKRsTest {
             excel.setExcelSheet("Tạo OKRs");
 
             index.openCorp();
-            create.click_navigation_OKRs();
-            Thread.sleep(1000);
-            create.click_navigation_CreateOKRs();
-            Thread.sleep(1000);
-
-            create.click_navigation_CreatePage();
-            Thread.sleep(1000);
+            create.navigation_OKRsPageEdit();
+            
             edit.chose_OKRsedit("OKRs QUY I");
             index.waitForPageLoaded();
             create.cleartxt();

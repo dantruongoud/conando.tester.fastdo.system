@@ -20,14 +20,7 @@ public class CreateOKRsTest {
             excel.setExcelSheet("Tạo OKRs");
 
             index.openCorp();
-            create.click_navigation_OKRs();
-            Thread.sleep(1000);
-            create.click_navigation_CreateOKRs();
-            Thread.sleep(1000);
-            create.click_navigation_CreatePage();
-            Thread.sleep(1000);
-            create.click_create();
-            index.waitForPageLoaded();
+            create.navigation_OKRsPage();
 
             if (index.verifyTitle("OKRs - Công bố mục tiêu")) {
                 for (int i = 1; i < 6; i++) {

@@ -55,7 +55,7 @@ public class repplyKaizenTest {
                             index.uploadImage("//a[@title='Đính kèm hình ảnh']", "");
                             break;
                         default:
-                            if (repply.verifyContent("Tôi hơi bị kết cái Kaizen của bạn đấy")) {
+                            if (repply.verifyContent(data_test[1].content)) {
                                 index.passed();
                             } else {
                                 index.passed();
