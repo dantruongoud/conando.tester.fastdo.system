@@ -36,14 +36,16 @@ public class CreateProductPage {
         return name.equals("name");
     }
 
-    public void createProduct(String name, String number) {
+    public void createProduct(String name, String number) throws Exception {
         nameProduct_input.sendKeys(name);
         starNumber_input.sendKeys(number);
+        Thread.sleep(500);
         save_btn.click();
+        Thread.sleep(1000);
     }
 
     public void print() {
-        System.out.println("PASSED");
+        System.out.println("Status: PASSED");
         System.out.println("=========================");
         clear();
     }

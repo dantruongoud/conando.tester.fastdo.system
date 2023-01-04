@@ -8,8 +8,23 @@ import page.Setting.Gift_exchange.store.CreateProductPage;
 import setupbase.baseSetup;
 
 public class CreatediscountTest {
+    int testcase;
+    String name;
+
+    public CreatediscountTest(int testcase, String name) {
+        this.testcase = testcase;
+        this.name = name;
+    }
+
     public static void main(String[] args) {
         try {
+
+            CreatediscountTest[] data = {
+                    new CreatediscountTest(1, "name discount"),
+                    new CreatediscountTest(2, ""),
+                    new CreatediscountTest(3, "name discount"),
+            };
+
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index using = new index(driver);
@@ -29,33 +44,39 @@ public class CreatediscountTest {
             discount.click_create();
             Thread.sleep(1000);
 
-            discount.click_save();
-            System.out.println("Testcase: 1");
             System.out.println("=====================");
+            System.out.println("TestCase: " + data[0].testcase);
+            discount.enterName(data[0].name);
+
             String noti = using.messgaeError_tagline();
-            if (noti != null) {
+            if (noti.equals("Nhập các trường bắt buộc (*)")) {
                 System.out.println(noti);
-                discount.enterName("name");
                 using.passed();
-                discount.click_save();
-                System.out.println("Testcase: 2");
-                System.out.println("=====================");
-                noti = using.messgaeError_tagline();
-                if (noti != null) {
-                    System.out.println(noti);
-                    using.passed();
-                    using.uploadImage("//div[@class='field']//div[@class='control is-expanded']", "xpath");
-                    discount.click_save();
-                    System.out.println("Testcase: 3");
+                using.uploadImage("//div[@class='field']//div[@class='control is-expanded']", "xpath");
+
+                for (int i = 1; i < data.length; i++) {
+                    discount.name_input.clear();
                     System.out.println("=====================");
-                    if (discount.verifyText()) {
-                        System.out.println("Tạo mới thành công");
-                        using.passed();
-                    } else {
-                        using.failed();
+
+                    System.out.println("TestCase: " + data[i].testcase);
+                    discount.enterName(data[i].name);
+
+                    noti = using.messgaeError_tagline();
+                    switch (noti) {
+                        case "Nhập các trường bắt buộc (*)":
+                            System.out.println(noti);
+                            using.passed();
+                            break;
+
+                        default:
+                            if (noti.equals("Đã cập nhật banner ưu đãi thành công!")) {
+                                using.passed();
+                            } else {
+                                System.out.println(noti);
+                                using.failed();
+                            }
+                            break;
                     }
-                } else {
-                    using.failed();
                 }
             } else {
                 using.failed();

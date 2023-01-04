@@ -1,13 +1,12 @@
 package page.Setting.Gift_exchange.discount;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class CreateDiscountPage {
-    private WebDriver driver;
+    WebDriver driver;
 
     @FindBy(css = "a[href='/config/gift/banner']")
     public WebElement naviga;
@@ -16,7 +15,7 @@ public class CreateDiscountPage {
     private WebElement create_btn;
 
     @FindBy(xpath = "//body[1]/main[1]/section[1]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]")
-    private WebElement name_input;
+    public WebElement name_input;
 
     @FindBy(xpath = "//span[contains(text(),'Cập nhật')]")
     private WebElement save_btn;
@@ -28,9 +27,11 @@ public class CreateDiscountPage {
 
     public void enterName(String name) {
         try {
-            if (name_input.isDisplayed()) {
-                name_input.sendKeys(name);
-            }
+            name_input.sendKeys(name);
+            Thread.sleep(500);
+            save_btn.click();
+            Thread.sleep(1000);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,21 +45,5 @@ public class CreateDiscountPage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void click_save() {
-        try {
-            if (save_btn.isDisplayed()) {
-                save_btn.click();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean verifyText() {
-        WebElement td = driver.findElement(By.xpath("//tbody/tr[1]/td[2]"));
-        String tdname = td.getText().strip();
-        return tdname.equals("name");
     }
 }

@@ -121,6 +121,7 @@ public class index {
             String validation = "";
             if (tagline.size() > 0) {
                 validation = tagline.get(0).getText().strip();
+                System.out.println("Notify: " + validation);
             }
             return validation;
         } catch (Exception e) {
@@ -130,8 +131,8 @@ public class index {
     }
 
     public void error_titlePage() {
-        System.out.println("Status: FAILED");
         System.out.println("Sai tiêu đề trang hiển thị...");
+        System.out.println("Status: FAILED");
         System.out.println("=========================");
         driver.close();
     }

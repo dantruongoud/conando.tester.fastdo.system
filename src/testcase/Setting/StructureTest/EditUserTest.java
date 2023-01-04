@@ -62,7 +62,6 @@ public class EditUserTest {
                         edit.cleartxt();
                         break;
                     default:
-                        noti = index.messgaeError_tagline();
                         if (noti.equals("Đã cập nhật thông tin thành công!")) {
                             System.out.println(noti);
                             index.passed();
