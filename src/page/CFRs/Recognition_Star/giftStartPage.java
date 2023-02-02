@@ -8,6 +8,13 @@ import org.openqa.selenium.support.ui.Select;
 
 public class giftStartPage {
 
+    public String[] tagline = {
+            "Bạn chưa chọn người nhận !",
+            "Bạn không thể ghi nhận - tặng sao cho chính mình !",
+            "Bạn chưa chọn số sao muốn tặng !",
+            "Bạn chưa nhập nội dung !"
+    };
+
     WebDriver driver;
 
     @FindBy(css = "input[placeholder='Nhập số sao']")
@@ -40,7 +47,7 @@ public class giftStartPage {
         }
     }
 
-    public void cleartxt() {
+    public void clearDataTest() {
         number_input.clear();
     }
 
@@ -48,9 +55,9 @@ public class giftStartPage {
         enterNumber(number);
     }
 
-    public void print() {
-        System.out.println("Status: PASSED");
-        System.out.println("======================");
-        cleartxt();
-    }
+    // public void print() {
+    // System.out.println("Status: PASSED");
+    // System.out.println("======================");
+    // cleartxt();
+    // }
 }

@@ -15,7 +15,7 @@ public class cyclePage {
     @FindBy(css = "input[class='input']")
     private WebElement cycleName_input;
 
-    @FindBy(xpath = "/html/body/main/section/div/div[2]/form/div[3]/div[1]/div/div/input")
+    @FindBy(xpath = "//div[@class='field is-grouped']/div[1]//input[1]")
     private WebElement start_input;
 
     @FindBy(xpath = "/html/body/main/section/div/div[2]/form/div[3]/div[3]/div/div/input")
@@ -73,8 +73,9 @@ public class cyclePage {
         return getTitle().equals(a);
     }
 
-    public void create_cycle(String cycleName) {
+    public void create_cycle(String cycleName, String day) {
         cycleName_input.sendKeys(cycleName);
+        start_input.sendKeys(day);
         save_btn.click();
     }
 
@@ -86,6 +87,7 @@ public class cyclePage {
 
     public void cleartxt() {
         cycleName_input.clear();
+        start_input.clear();
     }
 
 }

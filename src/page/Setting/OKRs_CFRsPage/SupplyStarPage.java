@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class SupplyStarPage {
+
     private WebDriver driver;
 
     private By supplyStar = By.cssSelector("a[href='/config/okrs/stars/plus']");

@@ -125,7 +125,10 @@ public class CreateDraftCheckinPage {
     public void research(String search) {
         try {
             if (search_input.isDisplayed()) {
+                search_input.clear();
                 search_input.sendKeys(search);
+                Thread.sleep(1000);
+                chose_checkin.click();
             }
         } catch (Exception e) {
             e.printStackTrace();

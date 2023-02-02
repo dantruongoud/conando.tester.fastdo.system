@@ -18,6 +18,12 @@ public class SupplyStarTest {
 
     public static void main(String[] args) {
         try {
+            SupplyStarTest[] data_test = {
+                    new SupplyStarTest(1, ""),
+                    new SupplyStarTest(2, ""),
+                    new SupplyStarTest(3, "1"),
+            };
+
             baseSetup init = new baseSetup();
             WebDriver driver = init.initChromeDriver();
             index using = new index(driver);
@@ -34,18 +40,15 @@ public class SupplyStarTest {
 
             supply.click_create();
 
-            SupplyStarTest[] data_test = {
-                    new SupplyStarTest(1, ""),
-                    new SupplyStarTest(2, ""),
-                    new SupplyStarTest(3, "1"),
-            };
-
             for (int i = 0; i < data_test.length; i++) {
                 System.out.println("=========================");
                 System.out.println("Testcase: " + data_test[i].testcase);
+
                 supply.supply(data_test[i].number);
                 Thread.sleep(1000);
+
                 String noti = using.messgaeError_tagline();
+
                 switch (noti) {
                     case "Bạn chưa chọn nhân viên cần cấp sao !":
                         System.out.println(noti);

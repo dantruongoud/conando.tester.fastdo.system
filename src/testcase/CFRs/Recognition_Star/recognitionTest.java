@@ -42,56 +42,77 @@ public class recognitionTest {
             if (index.verifyTitle("CFRs - Ghi nhận & Tặng sao")) {
 
                 for (int i = 0; i < data_test.length; i++) {
-                    System.out.println("======================");
-
+                    System.out.println("=========================");
                     System.out.println("Testcase: " + data_test[i].testcase);
+                    use.clear();
+
                     use.recognition(data_test[i].content);
                     Thread.sleep(1000);
                     index.btnComponent.click();
                     Thread.sleep(1000);
 
+                    Boolean passed = false;
                     String noti = index.messgaeError_tagline();
-                    switch (noti) {
-                        case "Bạn chưa chọn người nhận !":
-                            System.out.println(noti);
+                    for (int j = 0; j < use.tagline.length; j++) {
+                        if (noti.equals(use.tagline[j])) {
+                            passed = true;
                             index.passed();
-                            create.research("NGUYEN DAN TRUONG");
-                            Thread.sleep(1000);
-                            create.click_Usercheckin();
-                            Thread.sleep(1000);
-                            use.clear();
+                            if (j == 0)
+                                create.research("TRUONG");
+                            if (j == 1)
+                                create.research("tan tan");
+                            if (j == 2)
+                                use.select();
                             break;
-                        case "Bạn không thể ghi nhận - tặng sao cho chính mình !":
-                            create.clearSearch();
-                            System.out.println(noti);
-                            index.passed();
-                            create.research("tan");
-                            Thread.sleep(1000);
-                            create.click_Usercheckin();
-                            Thread.sleep(1000);
-                            break;
-                        case "Bạn chưa chọn tiêu chí ghi nhận !":
-                            System.out.println(noti);
-                            index.passed();
-                            use.select();
-                            Thread.sleep(1200);
-                            use.clear();
-                            break;
-                        case "Bạn chưa nhập nội dung !":
-                            System.out.println(noti);
+                        } else if (noti.contains("Bạn đã Gửi ghi nhận cho")) {
+                            passed = true;
                             index.passed();
                             break;
-                        default:
-                            // noti = index.messgaeError_tagline();
-                            if (noti.equals("Bạn đã Gửi ghi nhận cho tan tan thành công!")) {
-                                System.out.println(noti);
-                                index.passed();
-                            } else {
-                                index.failed();
-                            }
-                            break;
+                        }
                     }
-                    Thread.sleep(1200);
+                    if (!passed)
+                        index.failed();
+                    // switch (noti) {
+                    // case "Bạn chưa chọn người nhận !":
+                    // System.out.println(noti);
+                    // index.passed();
+                    // create.research("NGUYEN DAN TRUONG");
+                    // Thread.sleep(1000);
+                    // create.click_Usercheckin();
+                    // Thread.sleep(1000);
+                    // use.clear();
+                    // break;
+                    // case "Bạn không thể ghi nhận - tặng sao cho chính mình !":
+                    // create.clearSearch();
+                    // System.out.println(noti);
+                    // index.passed();
+                    // create.research("tan");
+                    // Thread.sleep(1000);
+                    // create.click_Usercheckin();
+                    // Thread.sleep(1000);
+                    // break;
+                    // case "Bạn chưa chọn tiêu chí ghi nhận !":
+                    // System.out.println(noti);
+                    // index.passed();
+                    // use.select();
+                    // Thread.sleep(1200);
+                    // use.clear();
+                    // break;
+                    // case "Bạn chưa nhập nội dung !":
+                    // System.out.println(noti);
+                    // index.passed();
+                    // break;
+                    // default:
+                    // // noti = index.messgaeError_tagline();
+                    // if (noti.equals("Bạn đã Gửi ghi nhận cho tan tan thành công!")) {
+                    // System.out.println(noti);
+                    // index.passed();
+                    // } else {
+                    // index.failed();
+                    // }
+                    // break;
+                    // }
+                    // Thread.sleep(1200);
                 }
             } else {
                 index.error_titlePage();

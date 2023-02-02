@@ -7,7 +7,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class recognitonPage {
-    private WebDriver driver;
+
+    public String[] tagline = {
+            "Bạn chưa chọn người nhận !",
+            "Bạn không thể ghi nhận - tặng sao cho chính mình !",
+            "Bạn chưa chọn tiêu chí ghi nhận !",
+            "Bạn chưa nhập nội dung !"
+    };
+
+    WebDriver driver;
 
     @FindBy(css = "a[href='cfr/star']")
     private WebElement naviga;

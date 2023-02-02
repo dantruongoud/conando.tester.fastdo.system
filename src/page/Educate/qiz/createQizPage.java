@@ -6,6 +6,17 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class createQizPage {
+
+    public String[] tagline = {
+            "Nhập tiêu đề và thời lượng bài trắc nghiệm !",
+            "Giá trị mức điểm đạt phải lớn hơn hoặc bằng 1 !",
+            "Mức điểm đạt được của bài thi phải nhỏ hơn tổng điểm bài thi !",
+            "Có câu hỏi chưa nhập nội dung, vui lòng nhập nội dung cho câu hỏi",
+            "Có đáp án chưa có nội dung, vui lòng nhập nội dung cho đáp án !",
+            "Có câu hỏi chưa có đáp án đúng, vui lòng chọn 1 đáp án đúng cho câu hỏi !",
+            "Đã cập nhật thông tin bài trắc nghiệm !"
+    };
+
     private WebDriver driver;
 
     public WebDriver getDriver() {
@@ -56,7 +67,7 @@ public class createQizPage {
         result_input.sendKeys(result);
     }
 
-    public void clearTXT() {
+    public void clearDataTest() {
         titleQiz_input.clear();
         time_input.clear();
         point_input.clear();
@@ -64,9 +75,9 @@ public class createQizPage {
         result_input.clear();
     }
 
-    public void print() {
-        System.out.println("PASSED");
-        System.out.println("======================");
-        clearTXT();
-    }
+    // public void print() {
+    // System.out.println("PASSED");
+    // System.out.println("======================");
+    // clearTXT();
+    // }
 }

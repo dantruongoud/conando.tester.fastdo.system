@@ -32,6 +32,7 @@ public class giftStartTest {
             index index = new index(driver);
             CreateDraftCheckinPage create = new CreateDraftCheckinPage(driver);
             recognitonPage use = new recognitonPage(driver);
+            giftStartPage Star = new giftStartPage(driver);
 
             index.openCorp();
             create.navigation_CFRs();
@@ -40,55 +41,75 @@ public class giftStartTest {
             index.waitForPageLoaded();
 
             if (index.verifyTitle("CFRs - Ghi nhận & Tặng sao")) {
-                giftStartPage Star = new giftStartPage(driver);
+
                 Star.select();
 
                 for (int i = 0; i < data_test.length; i++) {
                     System.out.println("======================");
-
                     System.out.println("Testcase: " + data_test[i].testcase);
+                    Star.clearDataTest();
+
                     Star.Stargift(data_test[i].number);
                     Thread.sleep(1000);
                     index.btnComponent.click();
 
                     Thread.sleep(500);
+
+                    Boolean passed = false;
                     String noti = index.messgaeError_tagline();
-                    switch (noti) {
-                        case "Bạn chưa chọn người nhận !":
-                            System.out.println(noti);
-                            Star.print();
-                            create.research("NGUYEN DAN TRUONG");
-                            Thread.sleep(1000);
-                            create.click_Usercheckin();
-                            Thread.sleep(1000);
+                    for (int j = 0; j < Star.tagline.length; j++) {
+                        if (noti.equals(Star.tagline[j])) {
+                            passed = true;
+                            index.passed();
+                            if (j == 0)
+                                create.research("TRUONG");
+                            if (j == 1)
+                                create.research("tan tan");
+                            if (j == 3)
+                                use.enterContent("Bạn làm rất tốt");
                             break;
-                        case "Bạn không thể ghi nhận - tặng sao cho chính mình !":
-                            create.clearSearch();
-                            System.out.println(noti);
-                            Star.print();
-                            create.research("tan");
-                            Thread.sleep(1000);
-                            create.click_Usercheckin();
-                            Thread.sleep(1000);
+                        } else if (noti.contains("Bạn đã Tặng 1 sao cho")) {
+                            passed = true;
+                            index.passed();
                             break;
-                        case "Bạn chưa chọn số sao muốn tặng !":
-                            System.out.println(noti);
-                            Star.print();
-                            break;
-                        case "Bạn chưa nhập nội dung !":
-                            System.out.println(noti);
-                            Star.print();
-                            use.enterContent("content");
-                            break;
-                        default:
-                            if (noti.equals("Bạn đã Tặng 1 sao cho tan tan thành công!")) {
-                                System.out.println(noti);
-                                index.passed();
-                            } else {
-                                index.failed();
-                            }
-                            break;
+                        }
                     }
+                    if (!passed)
+                        index.failed();
+                    // switch (noti) {
+                    // case "Bạn chưa chọn người nhận !":
+                    // System.out.println(noti);
+                    // Star.print();
+                    // create.research("NGUYEN DAN TRUONG");
+                    // Thread.sleep(1000);
+                    // break;
+                    // case "Bạn không thể ghi nhận - tặng sao cho chính mình !":
+                    // create.clearSearch();
+                    // System.out.println(noti);
+                    // Star.print();
+                    // create.research("tan");
+                    // Thread.sleep(1000);
+                    // create.click_Usercheckin();
+                    // Thread.sleep(1000);
+                    // break;
+                    // case "Bạn chưa chọn số sao muốn tặng !":
+                    // System.out.println(noti);
+                    // Star.print();
+                    // break;
+                    // case "Bạn chưa nhập nội dung !":
+                    // System.out.println(noti);
+                    // Star.print();
+                    // use.enterContent("content");
+                    // break;
+                    // default:
+                    // if (noti.contains("Bạn đã Tặng 1 sao cho")) {
+                    // System.out.println(noti);
+                    // index.passed();
+                    // } else {
+                    // index.failed();
+                    // }
+                    // break;
+                    // }
                 }
             } else {
                 index.error_titlePage();

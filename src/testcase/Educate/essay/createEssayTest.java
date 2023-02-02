@@ -41,45 +41,55 @@ public class createEssayTest {
 
                 for (int i = 1; i < 8; i++) {
                     System.out.println("======================");
-
                     System.out.println("Testcase: " + excel.getCellData("TCID", i));
+                    essay.clearDataTest();
+
                     essay.createEssay(excel.getCellData("Title", i), excel.getCellData("Time", i),
                             excel.getCellData("Point", i), excel.getCellData("Content", i));
+                    Thread.sleep(1000);
                     index.btnComponent.click();
-                    Thread.sleep(1200);
 
+                    Boolean passed = false;
                     String noti = index.messgaeError_tagline();
-
-                    switch (noti) {
-                        case "Nhập tiêu đề và thời lượng bài tự luận !":
-                            System.out.println(noti);
-                            essay.print();
+                    for (int j = 0; j < essay.tagline.length; j++) {
+                        if (noti.equals(essay.tagline[j])) {
+                            passed = true;
+                            index.passed();
                             break;
-                        case "Giá trị mức điểm đạt phải lớn hơn hoặc bằng 1 !":
-                            System.out.println(noti);
-                            essay.print();
-                            break;
-                        case "Mức điểm đạt được của bài thi phải nhỏ hơn tổng điểm bài thi !":
-                            System.out.println(noti);
-                            essay.print();
-                            break;
-                        case "Có câu hỏi chưa nhập nội dung !":
-                            System.out.println(noti);
-                            essay.print();
-                            break;
-                        default:
-                            noti = index.messgaeError_tagline();
-                            if (noti.equals("Đã cập nhật thông tin bài tự luận !")) {
-                                System.out.println(noti);
-                                index.passed();
-                            } else {
-                                System.out.println(noti);
-                                index.failed();
-                            }
-                            break;
+                        }
                     }
+                    if (!passed)
+                        index.failed();
+                    // switch (noti) {
+                    // case "Nhập tiêu đề và thời lượng bài tự luận !":
+                    // System.out.println(noti);
+                    // essay.print();
+                    // break;
+                    // case "Giá trị mức điểm đạt phải lớn hơn hoặc bằng 1 !":
+                    // System.out.println(noti);
+                    // essay.print();
+                    // break;
+                    // case "Mức điểm đạt được của bài thi phải nhỏ hơn tổng điểm bài thi !":
+                    // System.out.println(noti);
+                    // essay.print();
+                    // break;
+                    // case "Có câu hỏi chưa nhập nội dung !":
+                    // System.out.println(noti);
+                    // essay.print();
+                    // break;
+                    // default:
+                    // noti = index.messgaeError_tagline();
+                    // if (noti.equals("Đã cập nhật thông tin bài tự luận !")) {
+                    // System.out.println(noti);
+                    // index.passed();
+                    // } else {
+                    // System.out.println(noti);
+                    // index.failed();
+                    // }
+                    // break;
+                    // }
 
-                    Thread.sleep(1200);
+                    // Thread.sleep(1200);
                 }
             } else {
                 index.error_titlePage();

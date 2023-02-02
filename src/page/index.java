@@ -121,7 +121,7 @@ public class index {
             String validation = "";
             if (tagline.size() > 0) {
                 validation = tagline.get(0).getText().strip();
-                System.out.println("Notify: " + validation);
+                System.out.println("Notify System: " + validation);
             }
             return validation;
         } catch (Exception e) {

@@ -6,6 +6,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class createEssayPage {
+
+    public String[] tagline = {
+            "Nhập tiêu đề và thời lượng bài tự luận !",
+            "Giá trị mức điểm đạt phải lớn hơn hoặc bằng 1 !",
+            "Mức điểm đạt được của bài thi phải nhỏ hơn tổng điểm bài thi !",
+            "Có câu hỏi chưa nhập nội dung !",
+            "Đã cập nhật thông tin bài tự luận !"
+    };
+
     private WebDriver driver;
 
     @FindBy(xpath = "//span[contains(text(),'Thêm bài tự luận')]")
@@ -49,16 +58,16 @@ public class createEssayPage {
         content_input.sendKeys(content);
     }
 
-    public void clearTXT() {
+    public void clearDataTest() {
         title_input.clear();
         time_input.clear();
         point_input.clear();
         content_input.clear();
     }
 
-    public void print() {
-        System.out.println("Status: PASSED");
-        System.out.println("======================");
-        clearTXT();
-    }
+    // public void print() {
+    // System.out.println("Status: PASSED");
+    // System.out.println("======================");
+    // clearTXT();
+    // }
 }
